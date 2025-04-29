@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DefultButton from '../../components/Buttons/DefultButton';
 import DefultInput from '../../components/Form/DefultInput';
 import Dropdown from '../../components/Form/Dropdown';
 import axios from 'axios';
 import { MdOutlineClose } from "react-icons/md";
-
+import secureLocalStorage from 'react-secure-storage';
 
 const SignIn = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -25,11 +26,17 @@ const SignIn = () => {
             const res = await axios.post(import.meta.env.VITE_APP_API + '/auth/signin', formData);
             if (res.data.Status === "Success") {
                 setErrorMsg({ type: "success", message: res.data.Message });
+                localStorage.setItem("login", res.data.Token)
+                secureLocalStorage.setItem("loginE", res.data.Result.email)
+                secureLocalStorage.setItem("loginU", res.data.Result.username)
+                secureLocalStorage.setItem("loginR", res.data.Result.role)
+                localStorage.setItem("dashmenuID", 1)                        
+                navigate('/Dashboard/Home', { replace: true })
             } else {
                 setErrorMsg({ type: "error", message: res.data.Error });
             }
         } catch (err) {
-            setErrorMsg({ type: "error", message: "Internal Server Error" });
+            setErrorMsg({ type: "error", message: "Internal Server Error 2" });
             console.log(err);
         }
     };
