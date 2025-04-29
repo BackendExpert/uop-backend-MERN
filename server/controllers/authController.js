@@ -98,6 +98,10 @@ const authController = {
                 return res.json({ Error: "Password Not Match..."})
             }
 
+            if(checkuser.isActive === false){
+                return res.json({ Error: "Account is Not Active"})
+            }
+
             const createAct = new UserActivity({
                 email: email,
                 activity: 'User Login'
