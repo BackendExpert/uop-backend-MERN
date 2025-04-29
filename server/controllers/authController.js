@@ -26,7 +26,7 @@ const authController = {
 
             const emailPattern = /^[a-zA-Z0-9._%+-]+@pdn\.ac\.lk$/;
             if (!emailPattern.test(email)) {
-                return res.json({ error: "Email must end with @pdn.ac.lk" });
+                return res.json({ Error: "Email must end with @pdn.ac.lk" });
             }
 
             if (password.length < 6) {
