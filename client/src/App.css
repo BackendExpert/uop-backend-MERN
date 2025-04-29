@@ -1,0 +1,51 @@
+/* 
+    #03A9F4
+    #FF5722
+    #FAFAFA
+    #FFFFFF
+    #212121
+    #757575
+    #4CAF50
+    #F44336
+    #FFC107
+    #E0E0E0
+    #E64A19
+    #E64A19
+*/
+
+.test {
+  color: #03A9F4 #FF5722 #E64A19 #FAFAFA #FFFFFF #212121 #757575 #4CAF50 #F44336 #FFC107 #E0E0E0 #E64A19
+}
+
+/* Ensure DashSide has a proper height and overflow settings */
+.shadow-custom {
+  height: 100vh;
+  overflow-y: scroll;
+  top: 0;
+  left: 0;
+}
+
+/* Custom scrollbar styling for Webkit browsers (Chrome, Safari, Edge) */
+.shadow-custom::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Custom scrollbar thumb (the draggable part) for Webkit browsers */
+.shadow-custom::-webkit-scrollbar-thumb {
+  background-color: white;
+  /* Thumb color */
+}
+
+/* Custom scrollbar track (the background of the scrollbar) */
+.shadow-custom::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+  /* Track color */
+}
+
+/* Firefox scrollbar customization */
+.shadow-custom {
+  scrollbar-width: thin;
+  /* Set the scrollbar to thin */
+  scrollbar-color: rgb(255, 255, 255) rgb(255, 255, 255);
+  /* Thumb and track color */
+}
