@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 // routes
 const ConnectDB = require('./Config/DB')
+const authRoute = require('./routes/authRoute')
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.use('/auth', authRoute)
 
 app.get('/', (req, res) => {
     res.send(`Server running on port ${PORT}`);

@@ -26,7 +26,7 @@ const authController = {
 
             const emailPattern = /^[a-zA-Z0-9._%+-]+@pdn\.ac\.lk$/;
             if (!emailPattern.test(email)) {
-                return res.json({ error: "Email must end with @pdn.ac.lk" });
+                return res.json({ Error: "Email must end with @pdn.ac.lk" });
             }
 
             if (password.length < 6) {
@@ -63,7 +63,7 @@ const authController = {
                 const reusltnewact = await newactvitiy.save()
 
                 if(reusltnewact){
-                    return res.json({ Status: "Success", Message: "Regisataion Successful"})
+                    return res.json({ Status: "Success", Message: "Regisataion Successful.., Please wait for your account to be activated by the administrator."})
                 }
                 else{
                     return res.json({ Error: "Internal Server Error"})
@@ -96,6 +96,10 @@ const authController = {
 
             if(checkpass){
                 return res.json({ Error: "Password Not Match..."})
+            }
+
+            if(checkuser.isActive === false){
+                return res.json({ Error: "Account is Not Active"})
             }
 
             const createAct = new UserActivity({
