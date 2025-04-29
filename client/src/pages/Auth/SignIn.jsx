@@ -22,7 +22,7 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(import.meta.env.VITE_APP_API + '/auth/signup', formData);
+            const res = await axios.post(import.meta.env.VITE_APP_API + '/auth/signin', formData);
             if (res.data.Status === "Success") {
                 setErrorMsg({ type: "success", message: res.data.Message });
             } else {
@@ -56,7 +56,7 @@ const SignIn = () => {
                     </div>
                 </div>
             )}
-            
+
             <form onSubmit={handleSubmit}>
                 <DefultInput
                     label="Email"
