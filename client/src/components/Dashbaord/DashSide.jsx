@@ -20,7 +20,9 @@ const DashSide = () => {
     };
 
     return (
-        <div className="bg-white text-slate-800 min-h-screen p-6 shadow-md xl:rounded-r-3xl border-r border-gray-200">
+        <div className="bg-white text-slate-800 min-h-screen p-6 shadow-md xl:rounded-r-3xl border-r border-gray-200
+                overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-100 hover:scrollbar-thumb-blue-600 transition-all duration-300">
+
             <div className="text-center mb-6">
                 {/* <h1 className="text-3xl font-extrabold text-sky-500 tracking-wide">UniExam Pro</h1> */}
                 <img src={uoplogo} alt="" />

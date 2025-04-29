@@ -1,62 +1,92 @@
-import { MdDashboard } from "react-icons/md";
-import { FaUserGraduate, FaUsers, FaBookOpen, FaRegCalendarAlt, FaClipboardList } from "react-icons/fa";
-import { FaBuildingColumns, FaBook, FaTableList } from "react-icons/fa6";
-import { FaUserCog } from "react-icons/fa";
+import { BsCalendar3EventFill , BsMegaphoneFill, BsNewspaper, BsJournalBookmarkFill, BsFillGrid1X2Fill, BsPeopleFill  } from "react-icons/bs";
+import { FaImages, FaUser, FaUsers  } from "react-icons/fa6";
+import { MdEventNote, MdMiscellaneousServices  } from "react-icons/md";
+import { FaQuestionCircle, FaBook, FaMedal  } from "react-icons/fa";
 
 const dashsidedata = [
     {
         id: 1,
-        name: 'Dashboard',
-        link: '/Dashboard/Home',
-        icon: MdDashboard
+        name: "Dashboard",
+        icon: BsFillGrid1X2Fill,
+        link: '/Dashboard/Home'
     },
     {
         id: 2,
-        name: 'Courses',
-        link: '/Dashboard/Courses',
-        icon: FaBookOpen
+        name: "User Management",
+        icon: BsPeopleFill,
+        link: '/Dashboard/UserManagement'
     },
     {
         id: 3,
-        name: 'Departments',
-        link: '/Dashboard/Departments',
-        icon: FaBuildingColumns
+        name: "Event Management",
+        icon: BsCalendar3EventFill,
+        link: '/Dashboard/Events'
     },
     {
         id: 4,
-        name: 'Semesters',
-        link: '/Dashboard/Semesters',
-        icon: FaRegCalendarAlt
+        name: "Notice Management",
+        icon: BsMegaphoneFill,
+        link: '/Dashboard/Notice'
     },
     {
         id: 5,
-        name: 'Subjects',
-        link: '/Dashboard/Subjects',
-        icon: FaBook
+        name: "NEWS Management",
+        icon: BsNewspaper,
+        link: '/Dashboard/NEWS'
     },
     {
         id: 6,
-        name: 'Students',
-        link: '/Dashboard/Students',
-        icon: FaUserGraduate
+        name: "Research Management",
+        icon: BsJournalBookmarkFill,
+        link: '/Dashboard/Research'
     },
     {
         id: 7,
-        name: 'Results',
-        link: '/Dashboard/Results',
-        icon: FaTableList
+        name: "Home Image Management",
+        icon: FaImages,
+        link: '/Dashboard/HSliderImg'
     },
     {
         id: 8,
-        name: 'Users',
-        link: '/Dashboard/Users',
-        icon: FaUsers
+        name: "Latest Programme Management",
+        icon: MdEventNote,
+        link: '/Dashboard/ProgramSlider'
     },
     {
         id: 9,
-        name: 'Profile',
-        link: '/Dashboard/Profile',
-        icon: FaUserCog
+        name: "FAQ",
+        icon: FaQuestionCircle,
+        link: '/Dashboard/FAQ'
+    },
+    {
+        id: 10,
+        name: "Diploma",
+        icon: FaBook,
+        link: '/Dashboard/Diploma'
+    },
+    {
+        id: 11,
+        name: "Certificates",
+        icon: FaMedal,
+        link: '/Dashboard/Certificates'
+    },
+    {
+        id: 12,
+        name: "Societies",
+        icon: FaUsers,
+        link: '/Dashboard/Societies'
+    },
+    {
+        id: 13,
+        name: "Services & Quicklinks",
+        icon: MdMiscellaneousServices,
+        link: '/Dashboard/ServicesQuicklinks'
+    },
+    {
+        id: 14,
+        name: "Profile",
+        icon: FaUser,
+        link: '/Dashboard/Profile'
     },
 ];
 
