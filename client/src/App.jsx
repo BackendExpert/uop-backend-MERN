@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/HomePage/Home'
 import SignIn from './pages/Auth/SignIn'
 import SignUp from './pages/Auth/SignUp'
+import PrivateRoute from './components/Auth/PriveteRoute'
+import Dashbaord from './components/Dashbaord/DashHome'
+import HomeDash from './pages/Dashbaord/HomeDash'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +19,10 @@ function App() {
         <Route path='/Test' element={<Home /> } />
         <Route path='/' element={<SignIn /> } />
         <Route path='/register' element={<SignUp /> } />
+
+        <Route path='/Dashboard/' element={<PrivateRoute element={<Dashbaord /> } /> } >
+          <Route path='Home' element={<PrivateRoute element={<HomeDash /> } /> } />
+        </Route>
 
       </Routes>
     </BrowserRouter>
