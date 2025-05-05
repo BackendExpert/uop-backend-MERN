@@ -11,10 +11,25 @@ const userController = {
         try{
             const userEmail = req.params.userEmail
 
-            const checkuser = await User.findOne({ email: email })
+            const checkuser = await User.findOne({ email: userEmail })
 
             if(!checkuser){
                 return res.json({ Error: "The User Cannot find at this time..."})
+            }
+
+            const updateuserState = await User.findOneAndUpdate(
+                { email: userEmail },
+                [
+                    { $set: { isActive: { $not: "$isActive" } } }
+                ],
+                { new: true }
+            );
+
+            if(updateuserState){
+                return res.json({ Status: "Success", Message: "User Account Update Success"})
+            }
+            else{
+                return res.json({ Error: "Interanl Server Error"})
             }
             
         }
