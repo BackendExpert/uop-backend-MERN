@@ -186,7 +186,7 @@ const authController = {
 
             const checkpass = await bcrypt.compare(password, checkuser.password)
 
-            if (checkpass) {
+            if (!checkpass) {
                 return res.json({ Error: "Password Not Match..." })
             }
 
