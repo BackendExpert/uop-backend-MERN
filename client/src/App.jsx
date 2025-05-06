@@ -10,6 +10,7 @@ import PrivateRoute from './components/Auth/PriveteRoute'
 import Dashbaord from './components/Dashbaord/DashHome'
 import HomeDash from './pages/Dashbaord/HomeDash'
 import VerfyOPT from './pages/Auth/VerfyOPT'
+import UserMangement from './pages/UserManage/UserMangement'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
 
         <Route path='/Dashboard/' element={<PrivateRoute element={<Dashbaord /> } /> } >
           <Route path='Home' element={<PrivateRoute element={<HomeDash /> } /> } />
+          <Route path='UserManagement' element={ <PrivateRoute element={<UserMangement /> } /> } />
         </Route>
 
       </Routes>
