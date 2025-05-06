@@ -25,10 +25,10 @@ const authController = {
                 faculty
             } = req.body
 
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@pdn\.ac\.lk$/;
-            if (!emailPattern.test(email)) {
-                return res.json({ Error: "Email must end with @pdn.ac.lk" });
-            }
+            // const emailPattern = /^[a-zA-Z0-9._%+-]+@pdn\.ac\.lk$/;
+            // if (!emailPattern.test(email)) {
+            //     return res.json({ Error: "Email must end with @pdn.ac.lk" });
+            // }
 
             if (password.length < 6) {
                 return res.json({ Error: "Password must be at least 6 characters" });
