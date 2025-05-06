@@ -30,7 +30,9 @@ const SignUp = () => {
             if (res.data.Status === "Success") {
                 setErrorMsg({ type: "success", message: res.data.Message });
                 secureLocalStorage.setItem('email', formData.email)
-                navigate('/VerifyOTP', {replace: true})
+                setTimeout(() => {
+                    navigate('/VerifyOTP', { replace: true });
+                }, 2000);
             } else {
                 setErrorMsg({ type: "error", message: res.data.Error });
             }

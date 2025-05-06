@@ -152,7 +152,14 @@ const authController = {
                 );
 
                 if(updateUser){
-                    return res.json({ Status: "Success", Message: "Your Email Verification Success, Wait for Account Aprove by Admin"})
+                    const deleteopt = await UserOTP.findOneAndDelete({ email: email })
+
+                    if(deleteopt){
+                        return res.json({ Status: "Success", Message: "Your Email Verification Success, Wait for Account Aprove by Admin"})
+                    }
+                    else{
+                        return res.json({ Error: "Internal Server Error while Deleting the OTP"})
+                    }
                 }
                 else{
                     return res.json({ Error: "Internal Server Error while Verifing the OTP"})

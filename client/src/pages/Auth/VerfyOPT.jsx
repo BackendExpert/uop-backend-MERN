@@ -4,6 +4,8 @@ import secureLocalStorage from 'react-secure-storage'
 import axios from 'axios'
 import DefultButton from '../../components/Buttons/DefultButton'
 import DefultInput from '../../components/Form/DefultInput'
+import { MdOutlineClose } from 'react-icons/md'
+
 
 const VerfyOPT = () => {
     const navigate = useNavigate()
@@ -14,16 +16,17 @@ const VerfyOPT = () => {
     })
 
     const handleChange = (e) => {
-        setotpdata({ ...formData, [e.target.name]: e.target.value });
+        setotpdata({ ...otpdata, [e.target.name]: e.target.value });
     };
 
     const headleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(import.meta.env.VITE_APP_API + '/auth/verifyOPT/' + email, otpdata)
+            const res = await axios.post(import.meta.env.VITE_APP_API + `/auth/verifyOPT/${email}`, otpdata)
                 .then(res => {
                     if (res.data.Status === "Success") {
                         setErrorMsg({ type: "success", message: res.data.Message });
+                        localStorage.clear()
                         setTimeout(() => {
                             navigate('/');
                         }, 2000);
@@ -39,7 +42,7 @@ const VerfyOPT = () => {
     }
 
 
-    if (email === '') {
+    if (email) {
         return (
             <div className="max-w-md mx-auto mt-16 bg-white p-8 rounded-3xl shadow-2xl">
                 <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Register</h2>
@@ -81,8 +84,12 @@ const VerfyOPT = () => {
     }
     else {
         useEffect(() => {
-            navigate('/register', { replace: true })
-        }, [])
+            if (!email) {
+                localStorage.clear()
+                navigate('/register', { replace: true });
+            }
+        }, []);
+
     }
 
 }
