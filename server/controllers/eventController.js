@@ -126,9 +126,24 @@ const eventController = {
             else{
                 return res.json({ Error: "Inteanl Server Error whitle updating the Event" })
             }
-
         }
         catch (err) {
+            console.log(err)
+        }
+    },
+
+    activeEvents: async(req, res) => {
+        try{
+            const events = await Event.find({
+                $and: [
+                    { isActive: true },
+                    { isAccepted: true },
+                ]
+            })
+
+            return res.json({ Result: events })
+        }
+        catch(err){
             console.log(err)
         }
     }
