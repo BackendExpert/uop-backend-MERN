@@ -102,7 +102,7 @@ const AllUsers = () => {
                                                                     }
                                                                 </div>
                                                                 <div className="">
-                                                                    <Link>
+                                                                    <Link to={`/Dashboard/UpdateUser/${data.email}`}>
                                                                         <button className='bg-blue-500 p-1 px-2 ml-4 rounded text-white'>
                                                                             More
                                                                         </button>
