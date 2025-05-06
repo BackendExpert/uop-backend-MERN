@@ -12,6 +12,8 @@ import HomeDash from './pages/Dashbaord/HomeDash'
 import VerfyOPT from './pages/Auth/VerfyOPT'
 import UserMangement from './pages/UserManage/UserMangement'
 import UpdateUser from './pages/UserManage/UpdateUser'
+import EventsManage from './pages/Events/EventsManage'
+import CreateEvent from './pages/Events/CreateEvent'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +30,9 @@ function App() {
           <Route path='Home' element={<PrivateRoute element={<HomeDash /> } /> } />
           <Route path='UserManagement' element={ <PrivateRoute element={<UserMangement /> } /> } />
           <Route path='UpdateUser/:updateemail' element={<PrivateRoute element={<UpdateUser /> } /> } />
+          <Route path='Events' element={<PrivateRoute element={<EventsManage /> } /> } />
+          <Route path='CreateEvent' element={<PrivateRoute element={<CreateEvent /> } /> } />
+
         </Route>
 
       </Routes>
