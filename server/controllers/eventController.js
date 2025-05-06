@@ -43,7 +43,7 @@ const eventController = {
 
     getallEvent: async (req, res) => {
         try {
-            const eventall = await Event.find()
+            const eventall = await Event.find().populate('addby')
 
             return res.json({ Result: eventall })
         }
@@ -56,7 +56,7 @@ const eventController = {
         try {
             const email = req.params.email
 
-            const events = await Event.find({ email: email })
+            const events = await Event.find({ email: email }).populate('addby')
 
             return res.json({ Result: events })
         }

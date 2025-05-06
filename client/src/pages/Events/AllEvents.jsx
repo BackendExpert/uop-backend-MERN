@@ -4,6 +4,7 @@ import useRoleGuard from '../../hooks/useRoleGuard';
 import PageUpperContent from '../../components/DashPages/PageUpperContent';
 import axios from 'axios'
 import secureLocalStorage from 'react-secure-storage';
+import { formatDate } from '../../utils/helper';
 
 
 const AllEvents = () => {
@@ -67,6 +68,7 @@ const AllEvents = () => {
                         <th className='font-semibold'>#</th>
                         <th className='font-semibold'>Event Name</th>
                         <th className='font-semibold'>Event Add By</th>
+                        <th className='font-semibold'>Event Date</th>
                         <th className='font-semibold'>Event Active</th>
                         <th className='font-semibold'>Event Accepted</th>
                         <th className='font-semibold'>Acticon</th>
@@ -79,7 +81,8 @@ const AllEvents = () => {
                                 <tr className='h-12 border-b border-blue-200 text-center' key={index}>
                                     <td className='text-blue-500 font-semibold'>{index + 1}</td>
                                     <td>{data.title}</td>
-                                    <td>{data.addby}</td>
+                                    <td>{data.addby.username}</td>
+                                    <td>{formatDate(data.date)}</td>
                                     <td>
                                         {
                                             data.isActive === true ?
