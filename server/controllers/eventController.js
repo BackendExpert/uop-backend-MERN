@@ -72,7 +72,10 @@ const eventController = {
             const findEventUpdate = await Event.findByIdAndUpdate(
                 { id },
                 [
-                    { $set: { isAccepted: { $not: "$isAccepted" } } }
+                    { $set: { 
+                        isAccepted: { $not: "$isAccepted" },
+                        isActive: true
+                     } }
                 ],
                 { new: true }
             )

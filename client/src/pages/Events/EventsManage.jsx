@@ -2,6 +2,7 @@ import React from 'react'
 import PageUpperContent from '../../components/DashPages/PageUpperContent'
 import { BsCalendar3EventFill } from 'react-icons/bs'
 import DefultButton from '../../components/Buttons/DefultButton'
+import AllEvents from './AllEvents'
 
 const EventsManage = () => {
     return (
@@ -14,6 +15,8 @@ const EventsManage = () => {
                     text='Create Event'
                 />
             </a>
+
+            <AllEvents />
 
 
         </div>

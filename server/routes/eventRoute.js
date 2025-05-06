@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/createEvent/:email', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']), upload.single('image'),  eventController.createEvent)
 router.get('/allevents', authMiddleware, accessMiddleware(['dvc', 'admin']), eventController.getallEvent)
-router.get('/addevents/:email', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']), eventController.geteventaddby)
+router.get('/alleventsUser/:email', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']), eventController.geteventaddby)
 router.patch('/toggleAcceptEvent/:id', authMiddleware, accessMiddleware(['dvc', 'admin']), eventController.acceptRejectEvent)
 router.put('/updateEvent/:id', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']),  upload.single('image'), eventController.updateEvent)
 router.get('/visibleEvents', eventController.activeEvents)
