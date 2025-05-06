@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import secureLocalStorage from 'react-secure-storage';
+import { Link } from 'react-router-dom';
+
 
 const AllUsers = () => {
+    const username = secureLocalStorage.getItem('loginU');
+    const role = secureLocalStorage.getItem('loginR');
+    const email = secureLocalStorage.getItem('loginE');
     const [userdata, setuserdata] = useState([])
     const token = localStorage.getItem('login')
 
@@ -14,6 +20,16 @@ const AllUsers = () => {
             .then(res => setuserdata(res.data.Result))
             .catch(err => console.log(err))
     }, [])
+
+    const toggeleAccoutAcitve = (value) => {
+        try{
+
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
     return (
         <div className='bg-white p-8 rounded-xl shadow-xl'>
             <table className="w-full">
@@ -37,6 +53,7 @@ const AllUsers = () => {
                                     <td>{data.username}</td>
                                     <td>{data.email}</td>
                                     <td>{data.faculty}</td>
+                                    <td className='font-semibold text-blue-600 uppercase text-sm'>{data.role}</td>
                                     <td>
                                         {
                                             data.emailVerfy === true ?
@@ -47,12 +64,43 @@ const AllUsers = () => {
                                     </td>
                                     <td>
                                         {
-                                            data.emailVerfy === true ?
-                                                <div className="text-green-500 font-semibold">Verfied</div>
+                                            data.isActive === true ?
+                                                <div className="text-green-500 font-semibold">Active</div>
                                                 :
-                                                <div className="text-red-500 font-semibold">Not-Verfied</div>
+                                                <div className="text-red-500 font-semibold">Deactive</div>
                                         }
                                     </td>
+                                    <th>
+                                        <div className="">
+                                            <div className="">
+                                                {
+                                                    data.email === email ?
+                                                        <div className="text-center text-gray-400">Current User</div>
+                                                        :
+                                                        <div className="">
+                                                            <div className="flex ml-4 flex-end">
+                                                                <div className="">
+                                                                    {
+                                                                        data.isActive === true ?
+                                                                            <h1 className="cursor-pointer p-1 px-2 bg-white border border-red-500 text-green-500 rounded-full duration-500 hover:bg-red-600 hover:text-white">Deactivate</h1>
+                                                                            :
+                                                                            <h1 className="cursor-pointer p-1 px-2 bg-white border border-green-500 text-green-500 rounded-full duration-500 hover:bg-green-600 hover:text-white">Activate</h1>
+                                                                    }
+                                                                </div>
+                                                                <div className="">
+                                                                    <Link>
+                                                                        <button className='bg-blue-500 p-1 px-2 ml-4 rounded text-white'>
+                                                                            More
+                                                                        </button>
+                                                                    </Link>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </th>
                                 </tr>
                             )
                         })
