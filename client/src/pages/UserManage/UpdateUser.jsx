@@ -47,8 +47,9 @@ const UpdateUser = () => {
 
 
     const headleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const res = await axios.patch(import.meta.env.VITE_APP_API + '/user/changeUserRole/' + updateemail, {
+            const res = await axios.patch(import.meta.env.VITE_APP_API + '/user/changeUserRole/' + updateemail, updaterole, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -89,6 +90,7 @@ const UpdateUser = () => {
                                     <h3 className="text-xl font-semibold text-gray-800 mb-1">{user.username}</h3>
                                     <p className="text-sm text-gray-500 mb-1"><span className="font-medium text-gray-700">Email:</span> {user.email}</p>
                                     <p className="text-sm text-gray-500 mb-1"><span className="font-medium text-gray-700">Role:</span> {user.role}</p>
+                                    <p className="text-sm text-gray-500 mb-1"><span className="font-medium text-gray-700">Faculty:</span> {user.faculty}</p>
                                     <p className="text-sm">
                                         <span className="font-medium text-gray-700">Status:</span>
                                         <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold 
