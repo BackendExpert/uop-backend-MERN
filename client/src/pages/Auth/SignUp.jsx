@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DefultButton from '../../components/Buttons/DefultButton';
 import DefultInput from '../../components/Form/DefultInput';
 import Dropdown from '../../components/Form/Dropdown';
 import axios from 'axios';
 import { MdOutlineClose } from "react-icons/md";
+import secureLocalStorage from 'react-secure-storage';
+
 
 const SignUp = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -26,6 +29,10 @@ const SignUp = () => {
             const res = await axios.post(import.meta.env.VITE_APP_API + '/auth/signup', formData);
             if (res.data.Status === "Success") {
                 setErrorMsg({ type: "success", message: res.data.Message });
+                secureLocalStorage.setItem('email', formData.email)
+                setTimeout(() => {
+                    navigate('/VerifyOTP', { replace: true });
+                }, 2000);
             } else {
                 setErrorMsg({ type: "error", message: res.data.Error });
             }

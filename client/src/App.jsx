@@ -9,6 +9,7 @@ import SignUp from './pages/Auth/SignUp'
 import PrivateRoute from './components/Auth/PriveteRoute'
 import Dashbaord from './components/Dashbaord/DashHome'
 import HomeDash from './pages/Dashbaord/HomeDash'
+import VerfyOPT from './pages/Auth/VerfyOPT'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
         <Route path='/Test' element={<Home /> } />
         <Route path='/' element={<SignIn /> } />
         <Route path='/register' element={<SignUp /> } />
+        <Route path='/VerifyOTP' element={<VerfyOPT /> } />
 
         <Route path='/Dashboard/' element={<PrivateRoute element={<Dashbaord /> } /> } >
           <Route path='Home' element={<PrivateRoute element={<HomeDash /> } /> } />

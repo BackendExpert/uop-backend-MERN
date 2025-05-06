@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/signup', authController.signup)
 router.post('/signin', authController.singin)
-router.post('/verifyOPT', authController.verifyOPT)
+router.post('/verifyOPT/:email', authController.verifyOPT)
 
 module.exports = router;

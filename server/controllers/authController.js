@@ -25,10 +25,10 @@ const authController = {
                 faculty
             } = req.body
 
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@pdn\.ac\.lk$/;
-            if (!emailPattern.test(email)) {
-                return res.json({ Error: "Email must end with @pdn.ac.lk" });
-            }
+            // const emailPattern = /^[a-zA-Z0-9._%+-]+@pdn\.ac\.lk$/;
+            // if (!emailPattern.test(email)) {
+            //     return res.json({ Error: "Email must end with @pdn.ac.lk" });
+            // }
 
             if (password.length < 6) {
                 return res.json({ Error: "Password must be at least 6 characters" });
@@ -152,7 +152,14 @@ const authController = {
                 );
 
                 if(updateUser){
-                    return res.json({ Status: "Success", Message: "Your Email Verification Success, Wait for Account Aprove by Admin"})
+                    const deleteopt = await UserOTP.findOneAndDelete({ email: email })
+
+                    if(deleteopt){
+                        return res.json({ Status: "Success", Message: "Your Email Verification Success, Wait for Account Aprove by Admin"})
+                    }
+                    else{
+                        return res.json({ Error: "Internal Server Error while Deleting the OTP"})
+                    }
                 }
                 else{
                     return res.json({ Error: "Internal Server Error while Verifing the OTP"})
