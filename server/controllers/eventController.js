@@ -137,12 +137,7 @@ const eventController = {
 
     activeEvents: async(req, res) => {
         try{
-            const events = await Event.find({
-                $and: [
-                    { isActive: true },
-                    { isAccepted: true },
-                ]
-            })
+            const events = await Event.find({ isAccepted: true })
 
             return res.json({ Result: events })
         }
