@@ -74,7 +74,7 @@ const eventController = {
                 [
                     { $set: { 
                         isAccepted: { $not: "$isAccepted" },
-                        isActive: true
+                        isActive: { $not: "$isActive" }
                      } }
                 ],
                 { new: true }

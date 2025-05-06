@@ -42,55 +42,75 @@ const AllEvents = () => {
 
 
 
-  return (
-    <div className='bg-white rounded-xl shadow-xl p-8'>
-        <table className="w-full">
-            <thead>
-                <tr className='h-12 border-b border-blue-200 text-blue-500'>
-                    <th className='font-semibold'>#</th>
-                    <th className='font-semibold'>Event Name</th>
-                    <th className='font-semibold'>Event Add By</th>
-                    <th className='font-semibold'>Event Active</th>
-                    <th className='font-semibold'>Event Accepted</th>
-                    <th className='font-semibold'>Acticon</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    eventdata.map((data, index) => {
-                        return (
-                            <tr className='h-12 border-b border-blue-200 text-center' key={index}>
-                                <td className='text-blue-500 font-semibold'>{index + 1}</td>
-                                <td>{data.title}</td>
-                                <td>{data.addby}</td>
-                                <td>
-                                    {
-                                        data.isActive === true ?
-                                        <div className="font-semibold text-green-500">Active</div>
-                                        :
-                                        <div className="font-semibold text-red-500">Deactive</div>
-                                    }
-                                </td>
+    return (
+        <div className='bg-white rounded-xl shadow-xl p-8'>
+            <table className="w-full">
+                <thead>
+                    <tr className='h-12 border-b border-blue-200 text-blue-500'>
+                        <th className='font-semibold'>#</th>
+                        <th className='font-semibold'>Event Name</th>
+                        <th className='font-semibold'>Event Add By</th>
+                        <th className='font-semibold'>Event Active</th>
+                        <th className='font-semibold'>Event Accepted</th>
+                        <th className='font-semibold'>Acticon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        eventdata.map((data, index) => {
+                            return (
+                                <tr className='h-12 border-b border-blue-200 text-center' key={index}>
+                                    <td className='text-blue-500 font-semibold'>{index + 1}</td>
+                                    <td>{data.title}</td>
+                                    <td>{data.addby}</td>
+                                    <td>
+                                        {
+                                            data.isActive === true ?
+                                                <div className="font-semibold text-green-500">Active</div>
+                                                :
+                                                <div className="font-semibold text-red-500">Deactive</div>
+                                        }
+                                    </td>
 
-                                <td>
-                                    {
-                                        data.isAccepted === true ?
-                                        <div className="font-semibold text-green-500">Accepted</div>
-                                        :
-                                        <div className="font-semibold text-red-500">No-Accepted</div>
-                                    }
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-            </tbody>
-        </table>
-    </div>
-  )
+                                    <td>
+                                        {
+                                            data.isAccepted === true ?
+                                                <div className="font-semibold text-green-500">Accepted</div>
+                                                :
+                                                <div className="font-semibold text-red-500">No-Accepted</div>
+                                        }
+                                    </td>
+                                    <td>
+                                        {
+                                            role === 'dvc' || role === 'admin' ?
+                                                <div className="flex">
+                                                    {
+                                                        data.isAccepted === true ?
+                                                        <button className='bg-green-500 px-4 py-1 duration-500 hover:bg-green-600 text-white rounded-full'>Accept</button>
+                                                        :
+                                                        <button className='bg-green-500 px-4 py-1 duration-500 hover:bg-green-600 text-white rounded-full'>Reject</button>
+                                                    }
+                                                    
+                                                    <a href="">
+                                                        <button className='ml-4 px-4 py-1 bg-blue-500 text-white rounded duration-500 hover:bg-blue-600'>View</button>
+                                                    </a>
+                                                </div>
+                                                :
+                                                <div className="">
+                                                    <a href="">
+                                                        <button>View</button>
+                                                    </a>
+                                                </div>
+                                        }
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
 export default AllEvents
