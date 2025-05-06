@@ -10,7 +10,7 @@ router.post('/createEvent/:email', authMiddleware, accessMiddleware(['dvc', 'adm
 router.get('/allevents', authMiddleware, accessMiddleware(['dvc', 'admin']), eventController.getallEvent)
 router.get('/addevents/:email', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']), eventController.geteventaddby)
 router.patch('/toggleAcceptEvent/:id', authMiddleware, accessMiddleware(['dvc', 'admin']), eventController.acceptRejectEvent)
-router.put('/updateEvent/:id', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']), eventController.updateEvent)
+router.put('/updateEvent/:id', authMiddleware, accessMiddleware(['dvc', 'admin', 'user']),  upload.single('image'), eventController.updateEvent)
 router.get('/visibleEvents', eventController.activeEvents)
 
 module.exports = router;
