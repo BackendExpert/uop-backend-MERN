@@ -36,19 +36,21 @@ const SignUp = () => {
     };
 
     const facultyOptions = [
-        { label: 'Faculty of Agriculture', value: 'agriculture' },
-        { label: 'Faculty of Allied Health Sciences', value: 'allied_health_sciences' },
-        { label: 'Faculty of Arts', value: 'arts' },
-        { label: 'Faculty of Dental Sciences', value: 'dental_sciences' },
-        { label: 'Faculty of Engineering', value: 'engineering' },
-        { label: 'Faculty of Management', value: 'management' },
-        { label: 'Faculty of Medicine', value: 'medicine' },
-        { label: 'Faculty of Science', value: 'science' },
-        { label: 'Faculty of Veterinary Medicine and Animal Science', value: 'veterinary_medicine' },
-        { label: 'Postgraduate Institute of Humanities and Social Sciences (PGIHS)', value: 'pgihs' },
-        { label: 'Postgraduate Institute of Agriculture (PGIA)', value: 'pgia' },
-        { label: 'Postgraduate Institute of Science (PGIS)', value: 'pgis' },
+        { label: 'Faculty of Agriculture', value: 'Faculty of Agriculture' },
+        { label: 'Faculty of Allied Health Sciences', value: 'Faculty of Allied Health Sciences' },
+        { label: 'Faculty of Arts', value: 'Faculty of Arts' },
+        { label: 'Faculty of Dental Sciences', value: 'Faculty of Dental Sciences' },
+        { label: 'Faculty of Engineering', value: 'Faculty of Engineering' },
+        { label: 'Faculty of Management', value: 'Faculty of Management' },
+        { label: 'Faculty of Medicine', value: 'Faculty of Medicine' },
+        { label: 'Faculty of Science', value: 'Faculty of Science' },
+        { label: 'Faculty of Veterinary Medicine and Animal Science', value: 'Faculty of Veterinary Medicine and Animal Science' },
+        { label: 'Postgraduate Institute of Humanities and Social Sciences (PGIHS)', value: 'Postgraduate Institute of Humanities and Social Sciences (PGIHS)' },
+        { label: 'Postgraduate Institute of Agriculture (PGIA)', value: 'Postgraduate Institute of Agriculture (PGIA)' },
+        { label: 'ICT Center', value: 'ICT Center' },
+        { label: 'Administration', value: 'Administration' }
     ];
+    
 
     return (
         <div className="max-w-md mx-auto mt-16 bg-white p-8 rounded-3xl shadow-2xl">
