@@ -63,6 +63,8 @@ const authController = {
                 const reusltnewact = await newactvitiy.save()
 
                 if(reusltnewact){
+                    
+
                     return res.json({ Status: "Success", Message: "Regisataion Successful.., Please wait for your account to be activated by the administrator."})
                 }
                 else{
