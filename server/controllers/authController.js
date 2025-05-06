@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport({
 });
 
 const authController = {
-    signup: async( req, res) => {
-        try{
+    signup: async (req, res) => {
+        try {
             const {
                 username,
                 email,
@@ -41,8 +41,8 @@ const authController = {
                 ]
             })
 
-            if(checkuser){
-                return res.json({ Error: "User Already Exists"})
+            if (checkuser) {
+                return res.json({ Error: "User Already Exists" })
             }
 
             const hashpass = await bcrypt.hash(password, 10)
@@ -56,14 +56,14 @@ const authController = {
 
             const resnewuser = await newuser.save()
 
-            if(resnewuser){
+            if (resnewuser) {
                 const newactvitiy = new UserActivity({
                     email: email,
                     activity: 'User Registaion'
                 })
                 const reusltnewact = await newactvitiy.save()
 
-                if(reusltnewact){
+                if (reusltnewact) {
                     const generateRandomCode = (length = 10) => {
                         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}';
                         let code = '';
@@ -72,7 +72,7 @@ const authController = {
                         }
                         return code;
                     };
-                
+
                     const verificationCode = generateRandomCode();
 
                     const mailOptions = {
@@ -102,7 +102,7 @@ const authController = {
                     transporter.sendMail(mailOptions, (err, info) => {
                         if (err) {
                             return res.json({ Error: "Registration succeeded, but failed to send verification email." });
-                        } else {                           
+                        } else {
                             return res.json({
                                 Status: "Success",
                                 Message: "Registration successful. Verification code sent to your email. Verify Email Please wait and wait for activation."
@@ -111,22 +111,61 @@ const authController = {
                     });
 
                 }
-                else{
-                    return res.json({ Error: "Internal Server Error"})
+                else {
+                    return res.json({ Error: "Internal Server Error" })
                 }
 
-            }   
-            else{
-                return res.json({ Error: "Internal Server Error"})
+            }
+            else {
+                return res.json({ Error: "Internal Server Error" })
             }
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     },
 
-    singin: async(req, res) => {
-        try{
+    verifyOPT: async (req, res) => {
+        try {
+            const email = req.params.email
+
+            const { otp } = req.body
+
+            const checkuser = await User.findOne({ email: email })
+
+            if (!checkuser) {
+                return res.json({ Error: "No User Found by Givem Email Address" })
+            }
+
+            const getoptuser = await UserOTP.findOne({ email: email })
+
+            const checkopt = await bcrypt.compare(otp, getoptuser.otp)
+
+            if (!checkopt) {
+                return res.json({ Error: "OTP Not Match Please Check the otp" })
+            }
+            else {
+                const updateUser = await User.findOneAndUpdate(
+                    { email: email },
+                    { $set: { emailVerfy: true } },
+                    { new: true }
+                );
+
+                if(updateUser){
+                    return res.json({ Status: "Success", Message: "Your Email Verification Success, Wait for Account Aprove by Admin"})
+                }
+                else{
+                    return res.json({ Error: "Internal Server Error while Verifing the OTP"})
+                }
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    },
+
+    singin: async (req, res) => {
+        try {
             const {
                 email,
                 password
@@ -134,18 +173,18 @@ const authController = {
 
             const checkuser = await User.findOne({ email: email })
 
-            if(!checkuser){
-                return res.json({ Error: "No User Found by Given Email Address.., Please check the Email"})
+            if (!checkuser) {
+                return res.json({ Error: "No User Found by Given Email Address.., Please check the Email" })
             }
 
             const checkpass = await bcrypt.compare(password, checkuser.password)
 
-            if(checkpass){
-                return res.json({ Error: "Password Not Match..."})
+            if (checkpass) {
+                return res.json({ Error: "Password Not Match..." })
             }
 
-            if(checkuser.isActive === false){
-                return res.json({ Error: "Account is Not Active"})
+            if (checkuser.isActive === false) {
+                return res.json({ Error: "Account is Not Active" })
             }
 
             const createAct = new UserActivity({
@@ -155,20 +194,20 @@ const authController = {
 
             const reusltnewact = await createAct.save()
 
-            if(reusltnewact){
+            if (reusltnewact) {
                 const token = jwt.sign({ id: checkuser._id, role: checkuser.role, user: checkuser }, process.env.JWT_SECRET, { expiresIn: '1h' });
                 return res.json({ Status: "Success", Message: "Login Success", Result: checkuser, Token: token })
             }
-            else{
-                return res.json({ Error: "Internal Server Error"})
+            else {
+                return res.json({ Error: "Internal Server Error" })
             }
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
 
-    
+
 };
 
 module.exports = authController;    
