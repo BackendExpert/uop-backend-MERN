@@ -63,6 +63,8 @@ const SignUp = () => {
         <div className="max-w-md mx-auto mt-16 bg-white p-8 rounded-3xl shadow-2xl">
             <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Register</h2>
 
+            <p className="mb-4 text-sm"><span className='text-red-500 font-semibold'>IMPORTANT: </span> <span className='text-gray-500'>After successful registration, you will be redirected to the <span className='font-bold'>Verify OTP</span> page. This page is only accessible immediately after registration. Please verify your email address at this stage. <span className='font-bold'>If you choose not to verify now, you will not be able to verify your account later.</span></span></p>
+
             {errorMsg && (
                 <div
                     className={`${

@@ -9,7 +9,7 @@ const userController = {
 
     active_deactive_user: async(req, res) =>{
         try{
-            const userEmail = req.params.userEmail
+            const userEmail = req.params.email
 
             const checkuser = await User.findOne({ email: userEmail })
 
