@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useRoleGuard from '../../hooks/useRoleGuard';
 import PageUpperContent from '../../components/DashPages/PageUpperContent';
 import axios from 'axios'
@@ -41,6 +41,23 @@ const AllEvents = () => {
     }, [role, email]);
 
 
+    const toggleAccountActive = async (value) => {
+        try {
+            const res = await axios.patch(import.meta.env.VITE_APP_API + `/event/toggleAcceptEvent/${value}`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (res.data.Status === 'Success') {
+                alert(res.data.Message);
+                window.location.reload();
+            } else {
+                alert(res.data.Error);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <div className='bg-white rounded-xl shadow-xl p-8'>
@@ -85,21 +102,26 @@ const AllEvents = () => {
                                             role === 'dvc' || role === 'admin' ?
                                                 <div className="flex">
                                                     {
-                                                        data.isAccepted === true ?
-                                                        <button className='bg-green-500 px-4 py-1 duration-500 hover:bg-green-600 text-white rounded-full'>Accept</button>
-                                                        :
-                                                        <button className='bg-green-500 px-4 py-1 duration-500 hover:bg-green-600 text-white rounded-full'>Reject</button>
+                                                        data.isAccepted === false ?
+                                                            <button onClick={() => toggleAccountActive(data._id)} className='bg-green-500 px-4 py-1 duration-500 hover:bg-green-600 text-white rounded-full'>Accept</button>
+                                                            :
+                                                            <button  onClick={() => toggleAccountActive(data._id)} className='bg-red-500 px-4 py-1 duration-500 hover:bg-red-600 text-white rounded-full'>Reject</button>
                                                     }
-                                                    
-                                                    <a href="">
-                                                        <button className='ml-4 px-4 py-1 bg-blue-500 text-white rounded duration-500 hover:bg-blue-600'>View</button>
-                                                    </a>
+
+
+                                                    <Link to={`/Dashboard/ViewEvent/${data._id}`}>
+                                                        <button className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600">
+                                                            More
+                                                        </button>
+                                                    </Link>
                                                 </div>
                                                 :
                                                 <div className="">
-                                                    <a href="">
-                                                        <button>View</button>
-                                                    </a>
+                                                    <Link to={`/Dashboard/ViewEvent/${data._id}`}>
+                                                        <button className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600">
+                                                            More
+                                                        </button>
+                                                    </Link>
                                                 </div>
                                         }
                                     </td>

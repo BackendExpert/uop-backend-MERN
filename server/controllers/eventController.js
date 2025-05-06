@@ -70,7 +70,7 @@ const eventController = {
             const id = req.params.id
 
             const findEventUpdate = await Event.findByIdAndUpdate(
-                { id },
+                id,
                 [
                     { $set: { 
                         isAccepted: { $not: "$isAccepted" },
