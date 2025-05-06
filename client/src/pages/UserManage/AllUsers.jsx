@@ -4,15 +4,15 @@ import secureLocalStorage from 'react-secure-storage';
 import { Link, useNavigate } from 'react-router-dom';
 
 const AllUsers = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const username = secureLocalStorage.getItem('loginU');
     const role = secureLocalStorage.getItem('loginR');
     const email = secureLocalStorage.getItem('loginE');
-    const token = localStorage.getItem('login')
+    const token = localStorage.getItem('login');
 
-    const [userdata, setuserdata] = useState([])
-    const [searchTerm, setSearchTerm] = useState('')
-    const [currentPage, setCurrentPage] = useState(1)
+    const [userdata, setuserdata] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
     const usersPerPage = 10;
 
     useEffect(() => {
@@ -22,8 +22,8 @@ const AllUsers = () => {
             },
         })
             .then(res => setuserdata(res.data.Result))
-            .catch(err => console.log(err))
-    }, [])
+            .catch(err => console.log(err));
+    }, []);
 
     const toggleAccountActive = async (value) => {
         try {
@@ -33,19 +33,21 @@ const AllUsers = () => {
                 },
             });
             if (res.data.Status === 'Success') {
-                alert(res.data.Message)
-                window.location.reload()
+                alert(res.data.Message);
+                window.location.reload();
             } else {
-                alert(res.data.Error)
+                alert(res.data.Error);
             }
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
 
     const filteredUsers = userdata.filter(user =>
         user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.faculty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.role.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
@@ -55,24 +57,24 @@ const AllUsers = () => {
     );
 
     return (
-        <div className='bg-white p-6 rounded-xl shadow-lg'>
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-blue-600">All Users</h2>
+        <div className='bg-white p-6 rounded-xl shadow-xl border border-blue-100'>
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <h2 className="text-2xl font-bold text-blue-700">All Users</h2>
                 <input
                     type="text"
-                    placeholder="Search by username or email..."
-                    className="border border-blue-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    placeholder="Search by username, email, faculty, or role..."
+                    className="w-full sm:w-96 border border-blue-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     onChange={(e) => {
-                        setSearchTerm(e.target.value)
-                        setCurrentPage(1)
+                        setSearchTerm(e.target.value);
+                        setCurrentPage(1);
                     }}
                 />
             </div>
 
-            <div className="overflow-x-auto">
-                <table className="min-w-full text-left text-sm">
+            <div className="overflow-x-auto rounded-lg">
+                <table className="min-w-full text-left text-sm border border-blue-100">
                     <thead>
-                        <tr className='bg-blue-50 text-blue-600 uppercase tracking-wide text-xs font-semibold border-b'>
+                        <tr className='bg-blue-100 text-blue-700 uppercase tracking-wide text-xs font-semibold'>
                             <th className="p-3">#</th>
                             <th className="p-3">Username</th>
                             <th className="p-3">Email</th>
@@ -85,8 +87,8 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {paginatedUsers.map((data, index) => (
-                            <tr key={index} className='border-b hover:bg-blue-50'>
-                                <td className="p-3 font-medium text-blue-600">{(currentPage - 1) * usersPerPage + index + 1}</td>
+                            <tr key={index} className='border-b hover:bg-blue-50 transition-all'>
+                                <td className="p-3 text-blue-600 font-semibold">{(currentPage - 1) * usersPerPage + index + 1}</td>
                                 <td className="p-3">{data.username}</td>
                                 <td className="p-3">{data.email}</td>
                                 <td className="p-3">{data.faculty}</td>
@@ -105,17 +107,18 @@ const AllUsers = () => {
                                         <span className="text-red-500 font-medium">Inactive</span>
                                     )}
                                 </td>
-                                <td className="p-3 space-x-2 flex items-center">
+                                <td className="p-3 space-x-2 flex flex-wrap items-center">
                                     {data.email === email ? (
                                         <span className="text-gray-400 text-sm">Current User</span>
                                     ) : (
                                         <>
                                             <button
                                                 onClick={() => toggleAccountActive(data.email)}
-                                                className={`px-3 py-1 rounded-full border text-sm font-medium transition ${data.isActive
+                                                className={`px-3 py-1 rounded-full border text-sm font-medium transition ${
+                                                    data.isActive
                                                         ? 'border-red-500 text-red-500 hover:bg-red-500 hover:text-white'
                                                         : 'border-green-500 text-green-500 hover:bg-green-500 hover:text-white'
-                                                    }`}
+                                                }`}
                                             >
                                                 {data.isActive ? 'Deactivate' : 'Activate'}
                                             </button>
@@ -133,11 +136,10 @@ const AllUsers = () => {
                 </table>
             </div>
 
-            {/* Pagination */}
-            <div className="flex justify-end items-center mt-4 space-x-2">
+            <div className="flex justify-end items-center mt-6 space-x-2">
                 <button
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                    className="px-3 py-1 border rounded-lg hover:bg-blue-100"
+                    className="px-3 py-1 border rounded-lg hover:bg-blue-100 disabled:opacity-50"
                     disabled={currentPage === 1}
                 >
                     Prev
@@ -145,14 +147,14 @@ const AllUsers = () => {
                 <span className="text-sm text-gray-600">Page {currentPage} of {totalPages}</span>
                 <button
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                    className="px-3 py-1 border rounded-lg hover:bg-blue-100"
+                    className="px-3 py-1 border rounded-lg hover:bg-blue-100 disabled:opacity-50"
                     disabled={currentPage === totalPages}
                 >
                     Next
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default AllUsers
+export default AllUsers;
