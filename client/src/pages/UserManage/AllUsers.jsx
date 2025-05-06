@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import secureLocalStorage from 'react-secure-storage';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const AllUsers = () => {
+    const navigate = useNavigate()
     const username = secureLocalStorage.getItem('loginU');
     const role = secureLocalStorage.getItem('loginR');
     const email = secureLocalStorage.getItem('loginE');
@@ -21,9 +22,22 @@ const AllUsers = () => {
             .catch(err => console.log(err))
     }, [])
 
-    const toggeleAccoutAcitve = (value) => {
+    const toggeleAccoutAcitve = async (value) => {
         try{
-
+            const res = await axios.patch(import.meta.env.VITE_APP_API + `/user/updateUserStatus/${value}`,{}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+            .then(res => {
+                if(res.data.Status === 'Success'){
+                    alert(res.data.Message)
+                    window.location.reload()
+                }
+                else{
+                    alert(res.data.Error)
+                }
+            })
         }
         catch(err){
             console.log(err)
@@ -82,9 +96,9 @@ const AllUsers = () => {
                                                                 <div className="">
                                                                     {
                                                                         data.isActive === true ?
-                                                                            <h1 className="cursor-pointer p-1 px-2 bg-white border border-red-500 text-green-500 rounded-full duration-500 hover:bg-red-600 hover:text-white">Deactivate</h1>
+                                                                            <h1 onClick={() => toggeleAccoutAcitve(data.email)} className="cursor-pointer p-1 px-2 bg-white border border-red-500 text-red-500 rounded-full duration-500 hover:bg-red-600 hover:text-white">Deactivate</h1>
                                                                             :
-                                                                            <h1 className="cursor-pointer p-1 px-2 bg-white border border-green-500 text-green-500 rounded-full duration-500 hover:bg-green-600 hover:text-white">Activate</h1>
+                                                                            <h1 onClick={() => toggeleAccoutAcitve(data.email)} className="cursor-pointer p-1 px-2 bg-white border border-green-500 text-green-500 rounded-full duration-500 hover:bg-green-600 hover:text-white">Activate</h1>
                                                                     }
                                                                 </div>
                                                                 <div className="">
