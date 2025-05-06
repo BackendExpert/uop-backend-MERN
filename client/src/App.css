@@ -1,42 +1,51 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* 
+    #03A9F4
+    #FF5722
+    #FAFAFA
+    #FFFFFF
+    #212121
+    #757575
+    #4CAF50
+    #F44336
+    #FFC107
+    #E0E0E0
+    #E64A19
+    #E64A19
+*/
+
+.test {
+  color: #03A9F4 #FF5722 #E64A19 #FAFAFA #FFFFFF #212121 #757575 #4CAF50 #F44336 #FFC107 #E0E0E0 #E64A19
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Ensure DashSide has a proper height and overflow settings */
+.shadow-custom {
+  height: 100vh;
+  overflow-y: scroll;
+  top: 0;
+  left: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Custom scrollbar styling for Webkit browsers (Chrome, Safari, Edge) */
+.shadow-custom::-webkit-scrollbar {
+  width: 0px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Custom scrollbar thumb (the draggable part) for Webkit browsers */
+.shadow-custom::-webkit-scrollbar-thumb {
+  background-color: white;
+  /* Thumb color */
 }
 
-.card {
-  padding: 2em;
+/* Custom scrollbar track (the background of the scrollbar) */
+.shadow-custom::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+  /* Track color */
 }
 
-.read-the-docs {
-  color: #888;
+/* Firefox scrollbar customization */
+.shadow-custom {
+  scrollbar-width: thin;
+  /* Set the scrollbar to thin */
+  scrollbar-color: rgb(255, 255, 255) rgb(255, 255, 255);
+  /* Thumb and track color */
 }
