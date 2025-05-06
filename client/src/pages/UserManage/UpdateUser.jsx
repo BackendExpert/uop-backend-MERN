@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
+import useRoleGuard from '../../hooks/useRoleGuard';
 
 const UpdateUser = () => {
     const navigate = useNavigate()
-    const username = secureLocalStorage.getItem('loginU');
-    const role = secureLocalStorage.getItem('loginR');
     const email = secureLocalStorage.getItem('loginE');
+    const isAllowed = useRoleGuard(['dvc', 'admin'])
+    if (!isAllowed) return null
 
-    if(role === 'dvc' || role === 'admin'){
-        return (
-            <div>UpdateUser</div>
-          )
-    }
-    else{
-        useEffect(() => {
-            localStorage.clear()
-            window.location.reload()
-        }, [])
-    }
+    const { updateemail } = useParams()
 
+    
+    return (
+        <div>
+            {updateemail}
+        </div>
+    )
 }
 
 export default UpdateUser
