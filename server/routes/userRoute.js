@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.get('/allusers', authMiddleware, accessMiddleware(['dvc', 'admin']), userController.getallusers)
 router.patch('/updateUserStatus', authMiddleware, accessMiddleware(['dvc', 'admin']), userController.active_deactive_user)
+router.patch('/changeUserRole/:email', authMiddleware, accessMiddleware(['dvc', 'admin']), userController.changeUserRole)
 
 module.exports = router;
