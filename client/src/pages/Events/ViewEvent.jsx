@@ -6,6 +6,7 @@ import secureLocalStorage from 'react-secure-storage';
 import PageUpperContent from '../../components/DashPages/PageUpperContent';
 import DefultButton from '../../components/Buttons/DefultButton';
 import { formatDate } from '../../utils/helper';
+import UpdateEvent from './UpdateEvent';
 
 const ViewEvent = () => {
     const { id } = useParams();
@@ -90,6 +91,9 @@ const ViewEvent = () => {
                 ) : (
                     <p>Loading event details...</p>
                 )}
+            </div>
+            <div className="">
+                <UpdateEvent eventID={id} />
             </div>
         </div>
     )

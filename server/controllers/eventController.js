@@ -72,9 +72,11 @@ const eventController = {
             const findEventUpdate = await Event.findByIdAndUpdate(
                 id,
                 [
-                    { $set: { 
-                        isAccepted: { $not: "$isAccepted" },
-                     } }
+                    {
+                        $set: {
+                            isAccepted: { $not: "$isAccepted" },
+                        }
+                    }
                 ],
                 { new: true }
             )
@@ -93,17 +95,24 @@ const eventController = {
 
     updateEvent: async (req, res) => {
         try {
-            const id = req.params.id
+            const id = req.params.id;
 
             const {
                 title,
                 date,
                 description,
                 link
-            } = req.body
+            } = req.body;
 
             const image = req.file?.filename;
 
+            // Fetch the existing event from DB
+            const event = await Event.findById(id);
+            if (!event) {
+                return res.status(404).json({ Error: "Event not found" });
+            }
+
+            // Optional field validation if present but empty
             if (
                 ('title' in req.body && !title.trim()) ||
                 ('date' in req.body && !date.trim()) ||
@@ -113,34 +122,33 @@ const eventController = {
                 return res.status(400).json({ Error: "One or more required fields are empty" });
             }
 
-            const updateFields = {};
-            if (title) updateFields.title = title;
-            if (date) updateFields.date = date;
-            if (description) updateFields.description = description;
-            if (link) updateFields.link = link;
-            if (image) updateFields.image = image;
+            // Update only the fields that are provided
+            if (title) event.title = title;
+            if (date) event.date = date;
+            if (description) event.description = description;
+            if (link) event.link = link;
+            if (image) event.image = image;
 
-            const updatedEvent = await Event.findByIdAndUpdate(id, updateFields, { new: true });
+            // Save updated document
+            await event.save();
 
-            if (updatedEvent) {
-                return res.json({ Status: "Success", Message: "Event Updated Success" })
-            }
-            else{
-                return res.json({ Error: "Inteanl Server Error whitle updating the Event" })
-            }
-        }
-        catch (err) {
-            console.log(err)
+            return res.json({ Status: "Success", Message: "Event Updated Successfully" });
+
+        } catch (err) {
+            console.error("Update Error:", err);
+            return res.status(500).json({ Error: "Internal Server Error", Details: err.message });
         }
     },
 
-    activeEvents: async(req, res) => {
-        try{
+
+
+    activeEvents: async (req, res) => {
+        try {
             const events = await Event.find({ isAccepted: true })
 
             return res.json({ Result: events })
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     }
