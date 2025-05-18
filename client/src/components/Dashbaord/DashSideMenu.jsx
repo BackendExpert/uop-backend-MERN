@@ -1,7 +1,7 @@
-import { BsCalendar3EventFill , BsMegaphoneFill, BsNewspaper, BsJournalBookmarkFill, BsFillGrid1X2Fill, BsPeopleFill  } from "react-icons/bs";
-import { FaImages, FaUser, FaUsers  } from "react-icons/fa6";
-import { MdEventNote, MdMiscellaneousServices  } from "react-icons/md";
-import { FaQuestionCircle, FaBook, FaMedal  } from "react-icons/fa";
+import { BsCalendar3EventFill, BsMegaphoneFill, BsNewspaper, BsJournalBookmarkFill, BsFillGrid1X2Fill, BsPeopleFill } from "react-icons/bs";
+import { FaImages, FaUser, FaUsers } from "react-icons/fa6";
+import { MdEventNote, MdMiscellaneousServices } from "react-icons/md";
+import { FaQuestionCircle, FaBook, FaMedal } from "react-icons/fa";
 
 const dashsidedata = [
     {
@@ -42,48 +42,54 @@ const dashsidedata = [
     },
     {
         id: 7,
+        name: "Research Highlights",
+        icon: BsJournalBookmarkFill,
+        link: '/Dashboard/ResearchHighlights'
+    },
+    {
+        id: 8,
         name: "Home Image Management",
         icon: FaImages,
         link: '/Dashboard/HSliderImg'
     },
     {
-        id: 8,
+        id: 9,
         name: "Latest Programme Management",
         icon: MdEventNote,
         link: '/Dashboard/ProgramSlider'
     },
     {
-        id: 9,
+        id: 10,
         name: "FAQ",
         icon: FaQuestionCircle,
         link: '/Dashboard/FAQ'
     },
     {
-        id: 10,
+        id: 11,
         name: "Diploma",
         icon: FaBook,
         link: '/Dashboard/Diploma'
     },
     {
-        id: 11,
+        id: 12,
         name: "Certificates",
         icon: FaMedal,
         link: '/Dashboard/Certificates'
     },
     {
-        id: 12,
+        id: 13,
         name: "Societies",
         icon: FaUsers,
         link: '/Dashboard/Societies'
     },
     {
-        id: 13,
+        id: 14,
         name: "Services & Quicklinks",
         icon: MdMiscellaneousServices,
         link: '/Dashboard/ServicesQuicklinks'
     },
     {
-        id: 14,
+        id: 15,
         name: "Profile",
         icon: FaUser,
         link: '/Dashboard/Profile'
